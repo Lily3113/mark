@@ -5,12 +5,14 @@ import Footer from "@/components/Footer";
 import FloatingTape from "@/components/FloatingTape";
 import AnimatedHeading from "@/components/AnimatedHeading";
 import { useCountUp } from "@/hooks/useCountUp";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const About = () => {
+  const isMobile = useIsMobile();
   const clientsCount = useCountUp({ end: 100, suffix: "+", duration: 20000 });
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background overflow-x-hidden">
       <Navbar />
       
       {/* Hero Section */}
@@ -37,8 +39,8 @@ const About = () => {
           transition={{ duration: 0.7, delay: 0.2 }}
           className="relative max-w-4xl mx-auto overflow-visible"
         >
-          <FloatingTape color="orange" className="-left-12 -bottom-14" rotation={-100} size="lg" />
-          <FloatingTape color="rose" className="-right-10 -top-14" rotation={270} size="lg" />
+          <FloatingTape color="orange" className={isMobile ? "-left-3 -bottom-4" : "-left-12 -bottom-14"} rotation={-100} size="lg" />
+          <FloatingTape color="rose" className={isMobile ? "-right-3 -top-4" : "-right-10 -top-14"} rotation={270} size="lg" />
           <img 
             src="/5.png" 
             alt="Team collaboration" 

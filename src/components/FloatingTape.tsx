@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface FloatingTapeProps {
   color?: "blue" | "orange" | "rose";
@@ -13,6 +14,7 @@ const FloatingTape = ({
   rotation = 45,
   size = "md"
 }: FloatingTapeProps) => {
+  const isMobile = useIsMobile();
   const tapeImages = {
     blue: "/blue.png",
     orange: "/orange.png",
@@ -20,9 +22,9 @@ const FloatingTape = ({
   };
 
   const sizeClasses = {
-    sm: "w-16",
-    md: "w-24",
-    lg: "w-32",
+    sm: isMobile ? "w-6" : "w-16",
+    md: isMobile ? "w-8" : "w-24",
+    lg: isMobile ? "w-10" : "w-32",
   };
 
   return (
@@ -35,14 +37,14 @@ const FloatingTape = ({
       animate={{
         opacity: 1,
         scale: 1,
-        y: [0, -8, 0],
-        rotate: [rotation, rotation + 3, rotation - 2, rotation],
+        y: isMobile ? [0, -4, 0] : [0, -8, 0],
+        rotate: isMobile ? [rotation, rotation + 2, rotation - 1, rotation] : [rotation, rotation + 3, rotation - 2, rotation],
       }}
       transition={{
         opacity: { duration: 0.5 },
         scale: { duration: 0.5 },
-        y: { duration: 5, repeat: Infinity, ease: "easeInOut" },
-        rotate: { duration: 6, repeat: Infinity, ease: "easeInOut" },
+        y: { duration: isMobile ? 6 : 5, repeat: Infinity, ease: "easeInOut" },
+        rotate: { duration: isMobile ? 8 : 6, repeat: Infinity, ease: "easeInOut" },
       }}
     />
   );

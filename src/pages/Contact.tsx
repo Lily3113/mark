@@ -3,9 +3,11 @@ import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingTape from "@/components/FloatingTape";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { Phone, Mail, MapPin, Facebook, Instagram } from "lucide-react";
 
 const Contact = () => {
+  const isMobile = useIsMobile();
   const [selectedSubject, setSelectedSubject] = useState("general");
 
   const contactCards = [
@@ -27,7 +29,7 @@ const Contact = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background overflow-x-hidden">
       <Navbar />
       
       {/* Hero Section */}
@@ -54,7 +56,7 @@ const Contact = () => {
           transition={{ duration: 0.7, delay: 0.2 }}
           className="relative max-w-4xl mx-auto overflow-visible"
         >
-          <FloatingTape color="orange" className="-right-6 -top-6" rotation={45} size="lg" />
+          <FloatingTape color="orange" className="-right-6 -top-10" rotation={55} size="lg" />
           <img 
             src="/6.png" 
             alt="Office space" 

@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface TapedImageProps {
   src: string;
@@ -19,11 +20,12 @@ const TapedImage = ({
   imageClassName = "",
   tilt = 0,
 }: TapedImageProps) => {
+  const isMobile = useIsMobile();
   const tapePositionClasses = {
-    "top-left": "-top-4 -left-4 -rotate-45",
-    "top-right": "-top-4 -right-4 rotate-45",
-    "bottom-left": "-bottom-4 -left-4 rotate-45",
-    "bottom-right": "-bottom-4 -right-4 -rotate-45",
+    "top-left": isMobile ? "-top-2 -left-2 -rotate-45" : "-top-4 -left-4 -rotate-45",
+    "top-right": isMobile ? "-top-2 -right-2 rotate-45" : "-top-4 -right-4 rotate-45",
+    "bottom-left": isMobile ? "-bottom-2 -left-2 rotate-45" : "-bottom-4 -left-4 rotate-45",
+    "bottom-right": isMobile ? "-bottom-2 -right-2 -rotate-45" : "-bottom-4 -right-4 -rotate-45",
   };
 
   const tapeImages = {
@@ -51,13 +53,13 @@ const TapedImage = ({
       <motion.img
         src={tapeImages[tapeColor]}
         alt=""
-        className={`absolute w-16 h-auto ${tapePositionClasses[tapePosition]}`}
+        className={`absolute ${isMobile ? 'w-6' : 'w-16'} h-auto ${tapePositionClasses[tapePosition]}`}
         animate={{
-          rotate: [0, 3, -3, 0],
-          y: [0, -3, 0],
+          rotate: isMobile ? [0, 2, -2, 0] : [0, 3, -3, 0],
+          y: isMobile ? [0, -2, 0] : [0, -3, 0],
         }}
         transition={{
-          duration: 4,
+          duration: isMobile ? 5 : 4,
           repeat: Infinity,
           ease: "easeInOut",
         }}

@@ -4,10 +4,12 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingTape from "@/components/FloatingTape";
 import AnimatedHeading from "@/components/AnimatedHeading";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { TrendingUp, DollarSign, Users } from "lucide-react";
 import { useCountUp } from "@/hooks/useCountUp";
 
 const Services = () => {
+  const isMobile = useIsMobile();
   const { count: reviewCount, ref: reviewRef } = useCountUp({ end: 100, duration: 2000 });
   
   const serviceCards = [
@@ -30,7 +32,7 @@ const Services = () => {
 
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background overflow-x-hidden">
       <Navbar />
       
       {/* Hero Section */}
@@ -57,8 +59,8 @@ const Services = () => {
           transition={{ duration: 0.7, delay: 0.2 }}
           className="relative max-w-4xl mx-auto overflow-visible"
         >
-          <img src="/blue_circles.png" alt="Blue circles" className="absolute -left-11 bottom-[-90px]  w-40 h-40" />
-          <FloatingTape color="orange" className="-right-9 -top-11" rotation={75} size="lg" />
+          <img src="/blue_circles.png" alt="Blue circles" className={isMobile ? "absolute -left-3 bottom-[-25px] w-20 h-20" : "absolute -left-11 bottom-[-90px] w-40 h-40"} />
+          <FloatingTape color="orange" className={isMobile ? "-right-3 -top-3" : "-right-9 -top-11"} rotation={75} size="lg" />
           <img src="/12.png" alt="Professional services" className="w-full rounded-lg shadow-lg" />
         </motion.div>
       </section>
@@ -153,7 +155,7 @@ const Services = () => {
               </motion.div>
 
               {/* **ONE tape removed — remaining tape moved to corner** */}
-              <FloatingTape color="orange" className="-left-8 -bottom-10" rotation={-95} size="md" />
+              <FloatingTape color="orange" className={isMobile ? "-left-2 -bottom-3" : "-left-8 -bottom-10"} rotation={-95} size="md" />
             </motion.div>
           </div>
         </div>
@@ -218,7 +220,7 @@ const Services = () => {
           whileHover={{ scale: 1.01 }}
           className="relative overflow-visible"
         >
-          <FloatingTape color="orange" className="-right-6 -bottom-14" rotation={15} size="lg" />
+          <FloatingTape color="orange" className={isMobile ? "-right-2 -bottom-4" : "-right-6 -bottom-14"} rotation={15} size="lg" />
           <img 
             src="/14.png" 
             alt="Team collaboration" 
